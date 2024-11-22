@@ -1,0 +1,4 @@
+customerId,productId,metaInfoBody,status,expectedStatus
+2142,213,Test,200,OK
+2321,432423,{test:true},200,OK
+1111,423132,{},201,CREATED
