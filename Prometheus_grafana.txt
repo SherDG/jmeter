@@ -1,0 +1,11 @@
+https://github.com/johrstrom/jmeter-prometheus-plugin
+
+prometheus.port = 9270
+prometheus.ip = 127.0.0.1
+#prometheus.delay = 0
+prometheus.save.threads = true
+prometheus.save.threads.name = jmeter_threads
+prometheus.save.jvm = true
+
+
+https://github.com/johrstrom/jmeter-prometheus-plugin/blob/main/docs/examples/simple_prometheus_example.jmx

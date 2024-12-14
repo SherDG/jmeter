@@ -1,0 +1,23 @@
+https://haquemousume.medium.com/learn-to-generate-and-analyse-html-intuitive-reports-in-jmeter-574dbe1fca72 
+
+PATH_TO_JMETER_FOLDER/bin/jmeter -n -t PATH_TO_JMETER_Test.jmx -l YOUR_REPORT_FILE.csv
+OR
+export PATH=$PATH:/opt/apache-jmeter-5.5/bin
+
+e.g. for linux/mac
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/tests.jmx -l /home/dima/Завантаження/Hillel/JMETER/jmeter/report.csv
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t  /home/dima/Завантаження/Hillel/JMETER/jmeter/tests.jmx -l report.csv
+
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t  /home/dima/Завантаження/Hillel/JMETER/jmeter/tests.jmx -l /home/dima/Завантаження/Hillel/JMETER/jmeter/report_$(date +%F_%T).csv
+
+jmeter -n -t test.jmx -l results_$(date +%F_%T).jtl
+
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t  /home/dima/Завантаження/Hillel/JMETER/jmeter/tests.jmx  -l results_$(date +%F_%T).csv -e -o  /home/dima/Завантаження/Hillel/JMETER/jmeter/Reports
+
+Report from csv file
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -g /home/dima/Завантаження/Hillel/JMETER/jmeter/report_2024-12-01_11:36:27.csv -o /home/dima/Завантаження/Hillel/Reports
+sh  /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -g /home/dima/Завантаження/Hillel/report.csv -o /home/dima/Завантаження/Hillel/Reports

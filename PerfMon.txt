@@ -1,0 +1,7 @@
+cd /home/dima/Завантаження/Hillel/JMETER/ServerAgent-2.2.1
+
+./startAgent.sh --udp-port 0 --tcp-port 4444
+
+./startAgent.sh --udp-port 0 --auto-shutdown
+
+./startAgent.sh --sysinfo

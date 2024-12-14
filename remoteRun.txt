@@ -1,0 +1,14 @@
+server.rmi.ssl.disable=true
+server.rmi.hostname=192.168.0.104
+server.rmi.localport=1099
+
+
+jmeter-server
+
+java -Djava.rmi.server.hostname=192.168.0.104 -jar ~/Progs/apache-jmeter-5.5/bin/ApacheJMeter.jar -s
+
+sh jmeter.sh -n -t /home/dima/Завантаження/Hillel/JMETER/TestFragment.jmx -R 192.168.0.104 -l results.jtl
+
+sh jmeter.sh -n -t /home/dima/Завантаження/Hillel/JMETER/TestFragment.jmx  -l results_$(date +%F_%T).csv -e -o  /home/dima/Завантаження/Hillel/JMETER/jmeter/Reports
+
+jmeter.log - перевірити додатково чи все відбулось правильно
