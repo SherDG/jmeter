@@ -1,14 +1,53 @@
+jmeter-server
+
 server.rmi.ssl.disable=true
 server.rmi.hostname=192.168.0.104
 server.rmi.localport=1099
 
 
-jmeter-server
+remote_hosts=YOUR_IP_ADRESS
+server.rmi.localport=1099
+server.rmi.ssl.disable=true
 
-java -Djava.rmi.server.hostname=192.168.0.104 -jar ~/Progs/apache-jmeter-5.5/bin/ApacheJMeter.jar -s
+hostname -I
 
-sh jmeter.sh -n -t /home/dima/Завантаження/Hillel/JMETER/TestFragment.jmx -R 192.168.0.104 -l results.jtl
+Мережева синхронізація
+Складність синхронізації часу запуску тестів на різних машинах
+Потенційні затримки при старті та зупинці тестування
+Необхідність точного налаштування мережевих параметрів
 
-sh jmeter.sh -n -t /home/dima/Завантаження/Hillel/JMETER/TestFragment.jmx  -l results_$(date +%F_%T).csv -e -o  /home/dima/Завантаження/Hillel/JMETER/jmeter/Reports
+
+Продуктивність мережі
+Пропускна здатність мережі впливає на точність результатів
+Затримки передачі даних між машинами
+Ризик викривлення результатів через мережеві обмеження
+
+
+Технічні складності налаштування
+Необхідність встановлення Java на всіх машинах
+Ідентичні версії JMeter
+Налаштування RMI (Remote Method Invocation)
+Конфігурація SSL для безпечного з'єднання
+
+# На controller машині (jmeter.properties)
+server.rmi.localport=4000
+server.rmi.ssl.disable=true
+
+# На slave машинах
+server=true
+server.port=4000
+
+
+
+jmeter -n -t test.jmx -R slave1,slave2,slave3 -l results.jtl
+
+java -Djava.rmi.server.hostname=192.168.0.112 -jar ~/Progs/apache-jmeter-5.5/bin/ApacheJMeter.jar -s
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/RemoteRunTestFragment.jmx -R 192.168.0.112 -l results.jtl
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/RemoteRunTestFragment.jmx -R 192.168.0.112 -l /home/dima/Завантаження/Hillel/results.jtl -e -o  /home/dima/Завантаження/Hillel/JMETER/jmeter/Reports_remote
 
 jmeter.log - перевірити додатково чи все відбулось правильно
+
+Якщо одночасно запускаються кілька серверів, задайте унікальні порти в jmeter.properties:
+server.rmi.localport=50001

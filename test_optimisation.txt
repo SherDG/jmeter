@@ -1,0 +1,27 @@
+Оптимізація тестів
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t  /home/dima/Завантаження/Hillel/JMETER/jmeter/test_optimisation.jmx -l /home/dima/Завантаження/Hillel/result.jtl
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -g /home/dima/Завантаження/Hillel/result.jtl -o /home/dima/Завантаження/Hillel/Report1
+
+jmeter.properties:
+jmeter.save.saveservice.response_data.on_error=false
+
+
+
+Debug Sampler
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/test_optimisation_vars.jmx -l /home/dima/Завантаження/Hillel/result.jtl
+
+
+
+Використання -J та -G 
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/test_optimisation_vars.jmx  -Jdeck_count=2 -Gcount=3 -l /home/dima/Завантаження/Hillel/result.jtl -e -o /home/dima/Завантаження/Hillel/Report1
+
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/test_optimisation_vars.jmx -Jdeck_count=2 -Jcount=3 -Jconcurrency=1 -Jrampup=5 -Jsteps=2 -Jhold_rate=10 -l /home/dima/Завантаження/Hillel/result.jtl -e -o /home/dima/Завантаження/Hillel/Report1
+
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/ConcurrencyThreadGroup_HW.jmx -Jthreads=50 -Jduration=60 -JrampUp=1 -l /home/dima/Завантаження/Hillel/result.jtl -e -o /home/dima/Завантаження/Hillel/Report1
+
+
+
+

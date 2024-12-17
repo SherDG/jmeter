@@ -1,0 +1,46 @@
+user.properties
+jmeter.save.saveservice.output_format=csv
+jmeter.save.saveservice.response_data=false
+jmeter.save.saveservice.assertion_results=none
+
+jmeter.save.saveservice.subresults=false
+httpsampler.max_redirects=5
+
+
+
+
+
+####################################Custom load profile values##################################
+#Properties added to manage tests
+
+#!!!!!!!!!!!!!!!!!!!!!!!VARIABLE SETTINGS Example!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#TCJ_1
+#AllThreads_1=3 --> Target Conccurency 
+#AllTime_1=30 --> Ramp Up Time
+#AddingThreads_1=3 --> Ramp-Up Steps
+
+#1) Ramp Up Time / Ramp-Up Steps --> time for each portion of new threads
+#2) Target Conccurency / Ramp-Up Steps --> number of new threads per each step
+#3) TCJ_2 and TCJ_4 variables value must be bigger than TCJ_5 and TCJ_6
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+#TJ_1
+ThreadUsers_1=10
+RampUp_1=60
+LoopCount_1=5
+
+#TJ_2
+#-Jconcurrency=1 -Jrampup=5 -Jsteps=2 -Jhold_rate=10
+Concurrency_1=10
+RampUp_2=60
+Steps_1=2
+Hold_rate_1=10
+
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -p /home/dima/Завантаження/Hillel/JMETER/jmeter/ -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/GreatTestNumber.jmx -l /home/dima/Завантаження/Hillel/result.jtl -e -o /home/dima/Завантаження/Hillel/Report_2
+
+
+Windows
+jmeter -p "D:\testing\concurrent.properties" -n -t "D:\testing\Concurrent_requests.jmx" -l "D:\testing\Concurrent.csv"
+
+jmeter -g D:\testing\Concurrent.csv -o D:\testing\HTMLreports_Concurrent

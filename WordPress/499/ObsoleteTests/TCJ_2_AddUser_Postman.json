@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "8a456cb2-7046-426b-974a-aa92baf9fee8",
+		"name": "WP499",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Login page",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"
+					},
+					{
+						"key": "connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "cookie",
+						"value": "wordpress_test_cookie=WP+Cookie+check"
+					},
+					{
+						"key": "dnt",
+						"value": "1"
+					},
+					{
+						"key": "host",
+						"value": "499.wordpress.imunify.local"
+					},
+					{
+						"key": "upgrade-insecure-requests",
+						"value": "1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"
+					}
+				],
+				"url": {
+					"raw": "http://499.wordpress.imunify.local/wp-login.php",
+					"protocol": "http",
+					"host": [
+						"499",
+						"wordpress",
+						"imunify",
+						"local"
+					],
+					"path": [
+						"wp-login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log In",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"
+					},
+					{
+						"key": "connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "content-length",
+						"value": "120"
+					},
+					{
+						"key": "cookie",
+						"value": "wordpress_test_cookie=WP+Cookie+check"
+					},
+					{
+						"key": "dnt",
+						"value": "1"
+					},
+					{
+						"key": "host",
+						"value": "499.wordpress.imunify.local"
+					},
+					{
+						"key": "referer",
+						"value": "http://499.wordpress.imunify.local/wp-login.php"
+					},
+					{
+						"key": "upgrade-insecure-requests",
+						"value": "1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "log=admin&pwd=password1&wp-submit=Log+In&redirect_to=http%3A%2F%2F499.wordpress.imunify.local%2Fwp-admin%2F&testcookie=1"
+				},
+				"url": {
+					"raw": "http://499.wordpress.imunify.local/wp-login.php",
+					"protocol": "http",
+					"host": [
+						"499",
+						"wordpress",
+						"imunify",
+						"local"
+					],
+					"path": [
+						"wp-login.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get New user page",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"
+					},
+					{
+						"key": "connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "cookie",
+						"value": "wordpress_37eea7a3ace2b0a131a8650d2e805b51=admin%7C1559380886%7Crj7v6x7qgnNeiAlPUi1Y02Bg0KW0QIBFhfBGEO9ogSF%7C88bb6f14114099d30483b6346a50b728d6ad60f926bb0fc56abb1e5e9fcb8621; wordpress_test_cookie=WP+Cookie+check; wordpress_logged_in_37eea7a3ace2b0a131a8650d2e805b51=admin%7C1559380886%7Crj7v6x7qgnNeiAlPUi1Y02Bg0KW0QIBFhfBGEO9ogSF%7C2bd5b586132a7dded06c5ad6f80bd29600e2afae6b51783f1bad3a81b0a638ff; wp-settings-1=editor%3Dtinymce%26libraryContent%3Dupload; wp-settings-time-1=1559208087"
+					},
+					{
+						"key": "dnt",
+						"value": "1"
+					},
+					{
+						"key": "host",
+						"value": "499.wordpress.imunify.local"
+					},
+					{
+						"key": "referer",
+						"value": "http://499.wordpress.imunify.local/wp-admin/"
+					},
+					{
+						"key": "upgrade-insecure-requests",
+						"value": "1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"
+					}
+				],
+				"url": {
+					"raw": "http://499.wordpress.imunify.local/wp-admin/user-new.php",
+					"protocol": "http",
+					"host": [
+						"499",
+						"wordpress",
+						"imunify",
+						"local"
+					],
+					"path": [
+						"wp-admin",
+						"user-new.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip, deflate"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"
+					},
+					{
+						"key": "connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "content-length",
+						"value": "376"
+					},
+					{
+						"key": "content-type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "cookie",
+						"value": "wordpress_37eea7a3ace2b0a131a8650d2e805b51=admin%7C1559380886%7Crj7v6x7qgnNeiAlPUi1Y02Bg0KW0QIBFhfBGEO9ogSF%7C88bb6f14114099d30483b6346a50b728d6ad60f926bb0fc56abb1e5e9fcb8621; wordpress_test_cookie=WP+Cookie+check; wordpress_logged_in_37eea7a3ace2b0a131a8650d2e805b51=admin%7C1559380886%7Crj7v6x7qgnNeiAlPUi1Y02Bg0KW0QIBFhfBGEO9ogSF%7C2bd5b586132a7dded06c5ad6f80bd29600e2afae6b51783f1bad3a81b0a638ff; wp-settings-1=editor%3Dtinymce%26libraryContent%3Dupload; wp-settings-time-1=1559208087"
+					},
+					{
+						"key": "dnt",
+						"value": "1"
+					},
+					{
+						"key": "host",
+						"value": "499.wordpress.imunify.local"
+					},
+					{
+						"key": "referer",
+						"value": "http://499.wordpress.imunify.local/wp-admin/user-new.php"
+					},
+					{
+						"key": "upgrade-insecure-requests",
+						"value": "1"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "action=createuser&_wpnonce_create-user=b016538b5b&_wp_http_referer=%2Fwp-admin%2Fuser-new.php&user_login=user11&email=user11%40i.ua&first_name=&last_name=&url=&pass1=%5EK%29kIg%23%267mEIw%26%28x%21%26%28CPEhj&pass1-text=%5EK%29kIg%23%267mEIw%26%28x%21%26%28CPEhj&pass2=%5EK%29kIg%23%267mEIw%26%28x%21%26%28CPEhj&send_user_notification=1&role=subscriber&createuser=Add+New+User"
+				},
+				"url": {
+					"raw": "http://499.wordpress.imunify.local/wp-admin/user-new.php",
+					"protocol": "http",
+					"host": [
+						"499",
+						"wordpress",
+						"imunify",
+						"local"
+					],
+					"path": [
+						"wp-admin",
+						"user-new.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

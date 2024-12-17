@@ -1,0 +1,15 @@
+java --version
+$WORKSPACE
+
+Build Steps
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/test_optimisation_vars.jmx -Jdeck_count=2 -Jcount=3 -Jconcurrency=1 -Jrampup=5 -Jsteps=2 -Jhold_rate=10 -l /home/dima/Завантаження/Hillel/result.jtl -e -o $WORKSPACE/report
+
+
+Publish HTML reports
+$WORKSPACE/report
+index.html
+
+System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "sandbox allow-scripts;")
+
+
+
