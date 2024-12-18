@@ -1,0 +1,50 @@
+### **Різні сценарії тестування**
+
+Ви можете паралельно запускати кілька тестових сценаріїв JMeter для різних частин вашого додатку
+
+### **Тестування різних середовищ**
+
+Паралельні етапи можна використовувати для запуску тих самих тестів на різних середовищах, наприклад, `staging` та `production`
+
+
+### **Використання різної кількості користувачів**
+
+Для перевірки навантаження можна запускати сценарії з різною кількістю одночасних користувачів
+
+
+### **Розподілене тестування (Distributed Testing)**
+
+Якщо у вас налаштоване розподілене тестування, паралельні етапи можуть запускати тести на різних JMeter slave
+
+
+pipeline {
+    agent any    
+
+    stages {
+        stage('Run JMeter Tests in Parallel') {
+            parallel {
+                stage('Scenario 1') {
+                    steps {
+                        sh '''
+                            /home/dima/Progs/apache-jmeter-5.5/bin/jmeter \
+                            -p /home/dima/Завантаження/Hillel/JMETER/jmeter/load.properties \
+                            -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/GreatTestNumber_load.jmx \
+                            -l "$WORKSPACE/result_$(date +%F_%T).csv" \
+                            -e -o "$WORKSPACE/report_$(date +%F_%T)"
+                        '''
+                    }
+                }
+                stage('Scenario 2') {
+                    steps {
+                        sh '''
+                            /home/dima/Progs/apache-jmeter-5.5/bin/jmeter \
+                            -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/tests.jmx \
+                            -l "$WORKSPACE/report_$(date +%F_%T).csv"
+                        '''
+                    }
+                }
+            }
+        }
+    }
+}
+

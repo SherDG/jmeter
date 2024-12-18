@@ -1,0 +1,203 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying'
+            }
+        }
+    }
+}
+
+
+
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            }
+        }
+    }
+}
+
+Use Groovy Sandbox
+
+
+stage('Run JMeter Tests in Parallel') {
+    parallel {
+        stage('Scenario 1') {
+            steps {
+                sh "$JMETER_HOME/bin/jmeter -n -t jmeter-tests/test_plan_1.jmx -l results/scenario1.jtl"
+            }
+        }
+        stage('Scenario 2') {
+            steps {
+                sh "$JMETER_HOME/bin/jmeter -n -t jmeter-tests/test_plan_2.jmx -l results/scenario2.jtl"
+            }
+        }
+    }
+}
+
+pipeline {
+    agent {
+        docker {
+            image 'jmeter:latest'
+            args '-v /path/to/tests:/tests'
+        }
+    }
+
+    stages {
+        stage('Run JMeter Tests') {
+            steps {
+                sh "jmeter -n -t /tests/test_plan.jmx -l /tests/results.jtl"
+            }
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', 
+                    url: 'https://github.com/SherDG/jmeter.git'
+            }
+        }
+        
+        stage('Load Testing') {
+            steps {
+                // Create report directory first
+                sh 'mkdir -p report'
+                
+                // Run JMeter test with error handling
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    sh '/home/dima/Progs/apache-jmeter-5.5/bin/jmeter \
+                        -p load.properties \
+                        -n \
+                        -t GreatTestNumber_load.jmx \
+                        -l result.csv \
+                        -e \
+                        -o report'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Only archive if files exist
+            script {
+                if (fileExists('result.csv')) {
+                    archiveArtifacts artifacts: 'result.csv', fingerprint: true
+                }
+                
+                if (fileExists('report/index.html')) {
+                    publishHTML(target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'report',
+                        reportFiles: 'index.html',
+                        reportName: 'JMeter Load Test Report'
+                    ])
+                } else {
+                    echo 'No JMeter report found'
+                }
+            }
+        }
+    }
+}
+
+
+
+
+Final version
+------------------------------------------------------------------------------------------
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', 
+                    url: 'https://github.com/SherDG/jmeter.git'
+            }
+        }
+        
+        stage('Prepare Environment') {
+            steps {
+                // Remove existing report directory and recreate it
+                sh '''
+                    rm -rf report result.csv
+                    mkdir -p report
+                '''
+            }
+        }
+        
+        stage('Load Testing') {
+            steps {
+                // Run JMeter test with error handling
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    sh '/home/dima/Progs/apache-jmeter-5.5/bin/jmeter \
+                        -p load.properties \
+                        -n \
+                        -t GreatTestNumber_load.jmx \
+                        -l result.csv \
+                        -e \
+                        -o report'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            script {
+                // Archive result CSV if it exists
+                if (fileExists('result.csv')) {
+                    archiveArtifacts artifacts: 'result.csv', fingerprint: true
+                }
+                
+                // Publish HTML report if index.html exists
+                if (fileExists('report/index.html')) {
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'report',
+                        reportFiles: 'index.html',
+                        reportName: 'JMeter Load Test Report'
+                    ])
+                } else {
+                    echo 'No JMeter report found'
+                }
+            }
+        }
+        
+        // Add debugging for any failures
+        failure {
+            script {
+                echo 'Load testing failed'
+                sh 'ls -la'
+                sh 'pwd'
+            }
+        }
+    }
+}
+
