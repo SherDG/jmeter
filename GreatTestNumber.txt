@@ -1,12 +1,37 @@
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/test_optimisation_vars.jmx -Jdeck_count=2 -Jcount=3 -Jconcurrency=1 -Jrampup=5 -Jsteps=2 -Jhold_rate=10 -l /home/dima/Завантаження/Hillel/result.jtl -e -o /home/dima/Завантаження/Hillel/Report1
+
+
 user.properties
 jmeter.save.saveservice.output_format=csv
 jmeter.save.saveservice.response_data=false
 jmeter.save.saveservice.assertion_results=none
-
 jmeter.save.saveservice.subresults=false
 httpsampler.max_redirects=5
 
+Error generating the report: org.apache.jmeter.report.dashboard.GenerationException: Cannot assign "${jmeter.reportgenerator.apdex_satisfied_threshold}" to property "set_satisfied_threshold" (mapped as "setSatisfiedThreshold"), skip it
+... end of run
+APDEX (Application Performance Index) — це стандартний метод для вимірювання продуктивності програми. У контексті тестування продуктивності за допомогою JMeter порогові рядки APDEX допомагають визначити, як класифікується час відповіді:
+Під час створення звітів про ефективність JMeter використовує ці порогові значення, щоб:
+- Розрахувати відсоток задоволеності роботою
+- Візуалізувати продуктивність у різних категоріях
+- Надати короткий огляд швидкості реагування
 
+APDEX Satisfied Threshold (за замовчуванням 500 мс):
+Позначає час відповіді, який вважається "задовільним" або "добрим"
+Наприклад, якщо встановлено значення 500 мс, будь-який запит, що відповідає протягом 500 мілісекунд або менше, вважається "задоволеною" взаємодією
+
+Допустимий поріг APDEX (за замовчуванням 1500 мс):
+Позначає час відповіді, який вважається «прийнятним», але не ідеальним
+Продовжуючи попередній приклад, будь-яка відповідь між 500 мс і 1500 мс вважається "допустимою".
+
+Налаштувавши ці порогові значення, ви можете узгодити вимірювання продуктивності з очікуваною продуктивністю конкретної програми та цілями взаємодії з користувачем.
+# Change this parameter if you want to override the APDEX satisfaction threshold.
+# Set to 500 ms by default
+jmeter.reportgenerator.apdex_satisfied_threshold=500
+
+# Change this parameter if you want to override the APDEX tolerance threshold.
+# Set to 1500 ms by default
+jmeter.reportgenerator.apdex_tolerated_threshold=1500
 
 
 
@@ -14,22 +39,21 @@ httpsampler.max_redirects=5
 #Properties added to manage tests
 
 #!!!!!!!!!!!!!!!!!!!!!!!VARIABLE SETTINGS Example!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#TCJ_1
+#TS_1
 #AllThreads_1=3 --> Target Conccurency 
 #AllTime_1=30 --> Ramp Up Time
 #AddingThreads_1=3 --> Ramp-Up Steps
 
 #1) Ramp Up Time / Ramp-Up Steps --> time for each portion of new threads
 #2) Target Conccurency / Ramp-Up Steps --> number of new threads per each step
-#3) TCJ_2 and TCJ_4 variables value must be bigger than TCJ_5 and TCJ_6
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-#TJ_1
+#TG_1
 ThreadUsers_1=10
 RampUp_1=60
 LoopCount_1=5
 
-#TJ_2
+#TG_2
 #-Jconcurrency=1 -Jrampup=5 -Jsteps=2 -Jhold_rate=10
 Concurrency_1=10
 RampUp_2=60
@@ -37,10 +61,18 @@ Steps_1=2
 Hold_rate_1=10
 
 
-sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -p /home/dima/Завантаження/Hillel/JMETER/jmeter/ -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/GreatTestNumber.jmx -l /home/dima/Завантаження/Hillel/result.jtl -e -o /home/dima/Завантаження/Hillel/Report_2
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -p /home/dima/Завантаження/Hillel/JMETER/jmeter/load.properties -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/GreatTestNumber_load.jmx -l /home/dima/Завантаження/Hillel/result_1.csv -e -o /home/dima/Завантаження/Hillel/Report_2
 
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -p /home/dima/Завантаження/Hillel/JMETER/jmeter/load.properties -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/GreatTestNumber_load.jmx -l /home/dima/Завантаження/Hillel/result_1.csv
+
+sh /home/dima/Progs/apache-jmeter-5.5/bin/jmeter -p /home/dima/Завантаження/Hillel/JMETER/jmeter/load.properties -n -t /home/dima/Завантаження/Hillel/JMETER/jmeter/GreatTestNumber_load.jmx
 
 Windows
 jmeter -p "D:\testing\concurrent.properties" -n -t "D:\testing\Concurrent_requests.jmx" -l "D:\testing\Concurrent.csv"
 
 jmeter -g D:\testing\Concurrent.csv -o D:\testing\HTMLreports_Concurrent
+
+
+
+
+
